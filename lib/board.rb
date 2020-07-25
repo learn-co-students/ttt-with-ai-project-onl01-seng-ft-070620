@@ -1,7 +1,6 @@
 class Board
 
-    attr_accessor
-    attr_reader :cells
+    attr_accessor :cells
 
     def initialize
         self.reset!
@@ -18,5 +17,9 @@ class Board
     def reset!
         self.cells = Array.new(9, ' ')
     end 
+
+    def position(input)
+        self.cells[input-1]
+    end #position
 
 end #Board
