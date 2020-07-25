@@ -6,7 +6,7 @@ class Board
         self.reset!
     end #initialize
 
-    def display_board
+    def display
         puts " #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} "
         puts "-----------"
         puts " #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} "
@@ -19,7 +19,11 @@ class Board
     end 
 
     def position(input)
-        self.cells[input-1]
+        self.cells[input.to_i-1]
     end #position
+
+    def full?
+        
+    end # full?
 
 end #Board
