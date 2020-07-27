@@ -34,9 +34,28 @@ class Game
     end
 
     def winner
-        if won?
-            current_player.token == "X" ? "O" : "X"
+      @board.cells[won?[0]] if won?
+    end
+
+    def turn
+        current_move = current_player.move(@board)
+
+        if !@board.valid_move?(current_move)
+            turn
+        else
+            @board.update(current_move, current_player)
         end
     end
 
+    def play
+        while !over?
+            turn
+        end
+
+        if won?
+            puts "Congratulations #{winner}!"
+        else
+            puts "Cat's Game!"
+        end
+    end
 end
