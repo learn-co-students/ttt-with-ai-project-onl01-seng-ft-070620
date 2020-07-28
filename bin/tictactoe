@@ -1,3 +1,46 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hi! Welcome to the Tic Tac Toe CLI!"
+puts "Please input the number of players!"
+puts "(Entering \"0\" has the CPU play against itself!)"
+player_num = gets.to_i
+until player_num >= 0 && player_num <= 2
+  puts "We can't quite have that many players."
+  puts "Please input a number of players from 0-2"
+  player_num = gets.to_i
+end
+if player_num == 0
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+  puts "CPU fight! Press enter to move to the next turn!"
+  until game.over?
+    gets
+    game.turn
+    game.board.display
+  end
+  game.play
+end
+if player_num == 1
+  puts "Our version of Tic Tac Toe is customizable!"
+  puts "Enter a letter or symbol you want to play as"
+  human = Players::Human.new(gets.chomp)
+  puts "Great! Now enter a letter or symbol for the computer!"
+  puts "Make sure it's different from your own letter."
+  cpu = Players::Computer.new(gets.chomp)
+  game = Game.new(human, cpu, Board.new)
+  puts "Ok, let's play!"
+  game.play
+end
+
+if player_num == 2
+  puts "Our version of Tic Tac Toe is customizable!"
+  puts "Enter a letter or symbol for Player 1"
+  human1 = Players::Human.new(gets.chomp)
+  puts "Great! Now enter a letter or symbol for Player 2"
+  puts "Make sure it's different from your opponent's letter."
+  human2 = Players::Human.new(gets.chomp)
+  game = Game.new(human1, human2, Board.new)
+  puts "Ok, let's play!"
+  game.play
+end
